@@ -1,0 +1,43 @@
+environment:
+  grid_size: [100, 100]
+  max_steps: 1000
+  resource_types: ["land", "water", "forest"]
+
+spatial:
+  resolution: 30  # 米/像素
+  terrain_generation:
+    algorithm: "perlin"
+    scale: 50.0
+    octaves: 6
+    
+resources:
+  land:
+    regeneration_rate: 0.05
+    max_capacity: 100.0
+  water:
+    regeneration_rate: 0.1
+    max_capacity: 100.0
+  forest:
+    regeneration_rate: 0.02
+    max_capacity: 100.0
+
+# 添加网络配置
+networks:
+  policy_net:
+    hidden_sizes: [256, 128]
+    learning_rate: 0.001
+  value_net:
+    hidden_sizes: [256, 128]
+    learning_rate: 0.001
+
+# 添加损失函数配置
+losses:
+  policy_loss_weight: 1.0
+  value_loss_weight: 0.5
+  entropy_weight: 0.01
+
+# 添加训练配置
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  gamma: 0.99

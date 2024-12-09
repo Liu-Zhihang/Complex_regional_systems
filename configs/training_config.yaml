@@ -1,0 +1,68 @@
+# Complex_regional_systems/configs/training_config.yaml
+training:
+  # 基础训练参数
+  num_episodes: 1000
+  max_steps_per_episode: 1000
+  batch_size: 64
+  learning_rate: 0.001
+  gamma: 0.99
+  
+  # 网络配置
+  networks:
+    policy_net:
+      hidden_sizes: [256, 128]
+      learning_rate: 0.001
+    value_net:
+      hidden_sizes: [256, 128]
+      learning_rate: 0.001
+  
+  # 损失函数配置
+  losses:
+    policy_loss_weight: 1.0
+    value_loss_weight: 0.5
+    entropy_weight: 0.01
+  
+  # 课程学习参数
+  curriculum:
+    phases:
+      - name: "phase1"
+        episodes: 200
+        env_config:
+          max_agents: 10
+          resource_abundance: 1.0
+      - name: "phase2"
+        episodes: 300
+        env_config:
+          max_agents: 50
+          resource_abundance: 0.7
+      - name: "phase3"
+        episodes: 500
+        env_config:
+          max_agents: 100
+          resource_abundance: 0.5
+          
+  # 智能体训练配置
+  agents:
+    leader:
+      network: "mlp"
+      hidden_sizes: [256, 128]
+    entrepreneur:
+      network: "mlp"
+      hidden_sizes: [128, 64]
+    laborer:
+      network: "mlp"
+      hidden_sizes: [64, 32]
+  
+  # 添加PPO算法配置
+  ppo:
+    clip_ratio: 0.2
+    target_kl: 0.01
+    entropy_coef: 0.01
+    value_coef: 0.5
+    max_grad_norm: 0.5
+    
+  # 添加多智能体训练配置
+  multi_agent:
+    share_policy: false
+    communication: true
+    message_dim: 32

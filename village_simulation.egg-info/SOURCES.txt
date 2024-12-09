@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.py
+src/__init__.py
+src/agents/__init__.py
+src/agents/base_agent.py
+village_simulation.egg-info/PKG-INFO
+village_simulation.egg-info/SOURCES.txt
+village_simulation.egg-info/dependency_links.txt
+village_simulation.egg-info/requires.txt
+village_simulation.egg-info/top_level.txt
